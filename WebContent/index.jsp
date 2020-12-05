@@ -21,23 +21,21 @@
     <script src="js/main.js"></script>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/views/header.jsp"></jsp:include>
 	<%-- <jsp:include page="slider.jsp"></jsp:include> --%>
 	 <jsp:include page="SlideListServlet" /> 
 	
 	
-	      <a href="${pageContext.request.contextPath}/SlideListServlet">Danh sach sinh vien</a>
-	
-	  
+	     <%--  <a href="${pageContext.request.contextPath}/SlideListServlet">Danh sach sinh vien</a> --%>  
 	
 	<section>
 		<div class="container">
 			<div class="row">
-				<jsp:include page="category.jsp"></jsp:include>
-				<jsp:include page="product.jsp"></jsp:include>
+				<jsp:include page="/views/category.jsp"></jsp:include>
+				<jsp:include page="/views/product.jsp"></jsp:include>
 			</div>
 		</div>
 	</section>
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="/views/footer.jsp"></jsp:include>
 </body>
 </html>

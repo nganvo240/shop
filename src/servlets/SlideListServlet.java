@@ -54,7 +54,7 @@ public class SlideListServlet extends HttpServlet {
 		request.setAttribute("SlideListServlet", list);
 		
 		  RequestDispatcher dispatcher =
-		  request.getServletContext().getRequestDispatcher("/slider.jsp");
+		  request.getServletContext().getRequestDispatcher("/views/slider.jsp");
 //		  dispatcher.forward(request, response);
 		  dispatcher.include(request, response);
 		 

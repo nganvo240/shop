@@ -22,8 +22,6 @@
 						<div class="carousel-inner">
 						
 							<c:forEach  items="${SlideListServlet}" var="item" varStatus="loop">
-									
-							<%-- Every alternate school: ${loop.index} --%>
 									<c:if test="${loop.first }">
 										<div class="item active">
 									</c:if>
@@ -32,16 +30,15 @@
 									</c:if>
 										<div class="col-sm-6">
 											<h1><span>E</span>-SHOPPER</h1>
-											<h2>Free E-Commerce Template</h2>
-											<p> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+											<h2>${ item.title}</h2>
+											<p> ${ item.description} </p>
 											<button type="button" class="btn btn-default get">Get it now</button>
 										</div>
 										<div class="col-sm-6"> 
 											<img style="width:100%"
 											src="<c:url value="/images/slide/${ item.img}"/>">
 											<img src="images/home/pricing.png"  class="pricing" alt="" />
-										</div>
-								
+										</div>								
 										</div>																								    
 							</c:forEach>
 						

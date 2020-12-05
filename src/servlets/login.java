@@ -29,7 +29,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/login.jsp");
+		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
 		dispatcher.forward(request, response);
 	}
 

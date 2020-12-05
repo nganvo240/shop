@@ -18,12 +18,13 @@
 		<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
+			<%-- <form method="POST" action="${pageContext.request.contextPath}/InsertUser"> --%>
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
-						<h2>Login to your account</h2>
+						<h2>Đăng nhập tài khoản của bạn</h2>
 						<form action="#">
 							<input type="text" placeholder="Name" />
-							<input type="email" placeholder="Email Address" />
+							<input type="password" placeholder="Password" />
 							<span>
 								<input type="checkbox" class="checkbox"> 
 								Keep me signed in
@@ -32,17 +33,19 @@
 						</form>
 					</div><!--/login form-->
 				</div>
+			<!-- </form> -->
 				<div class="col-sm-1">
 					<h2 class="or">OR</h2>
 				</div>
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
-						<h2>New User Signup!</h2>
-						<form action="#">
-							<input type="text" placeholder="Name"/>
-							<input type="email" placeholder="Email Address"/>
-							<input type="password" placeholder="Password"/>
-							<button type="submit" class="btn btn-default">Signup</button>
+						<h2>New User Sign up!</h2>
+						<form method="POST" action="${pageContext.request.contextPath}/InsertUser">
+						<!-- <form action="#"> -->
+							<input type="text" name="username" placeholder="Name"/>
+							<input type="email" name="email" placeholder="Email Address"/>
+							<input type="password" name="password" placeholder="Password"/>
+							<button type="submit" class="btn btn-default">Sign up</button>
 						</form>
 					</div><!--/sign up form-->
 				</div>
