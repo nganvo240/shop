@@ -12,22 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.slide;
-import utils.DBslide;
-import utils.DBuser;
+import beans.product;
+import beans.type;
+import utils.DBcategory;
+import utils.DBproduct;
 import utils.MyUtils;
 
 /**
- * Servlet implementation class SlideListServlet
+ * Servlet implementation class categoryServlet
  */
- @WebServlet("/SlideListServlet") 
-/* @WebServlet(name="SlideListServlet", urlPatterns= {"/SlideListServlet"}) */
-public class SlideListServlet extends HttpServlet {
+@WebServlet("/categoryServlet")
+public class categoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**     * @see HttpServlet#HttpServlet()
+    /**
+     * @see HttpServlet#HttpServlet()
      */
-    public SlideListServlet() {
+    public categoryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +40,10 @@ public class SlideListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
 		String errorString = null;
-		List<slide> list = null;
+		List<type> list = null;
 		try {
-			list = DBslide.listSlide(conn);
-			System.out.println("danh sach slide");
+			list = DBcategory.listType(conn);
+			System.out.println("loai o home");
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -52,12 +53,11 @@ public class SlideListServlet extends HttpServlet {
 			e.printStackTrace();
 		} 
 
-		request.setAttribute("SlideListServlet", list);
+		request.setAttribute("TypetListServlet", list);
 		
 		  RequestDispatcher dispatcher =
-		  request.getServletContext().getRequestDispatcher("/views/slider.jsp");
+		  request.getServletContext().getRequestDispatcher("/views/category.jsp");
 		  dispatcher.include(request, response);
-		 
 	}
 
 	/**

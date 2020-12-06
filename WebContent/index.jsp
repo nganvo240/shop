@@ -31,8 +31,8 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<jsp:include page="/views/category.jsp"></jsp:include>
-				<jsp:include page="/views/product.jsp"></jsp:include>
+				<jsp:include page="categoryServlet" />
+				<jsp:include page="productServlet" />
 			</div>
 		</div>
 	</section>

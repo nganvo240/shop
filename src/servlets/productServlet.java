@@ -12,22 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.slide;
-import utils.DBslide;
-import utils.DBuser;
+import beans.product;
+import utils.DBproduct;
 import utils.MyUtils;
 
 /**
- * Servlet implementation class SlideListServlet
+ * Servlet implementation class productServlet
  */
- @WebServlet("/SlideListServlet") 
-/* @WebServlet(name="SlideListServlet", urlPatterns= {"/SlideListServlet"}) */
-public class SlideListServlet extends HttpServlet {
+@WebServlet("/productServlet")
+public class productServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**     * @see HttpServlet#HttpServlet()
+    /**
+     * @see HttpServlet#HttpServlet()
      */
-    public SlideListServlet() {
+    public productServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,10 +38,10 @@ public class SlideListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
 		String errorString = null;
-		List<slide> list = null;
+		List<product> list = null;
 		try {
-			list = DBslide.listSlide(conn);
-			System.out.println("danh sach slide");
+			list = DBproduct.listRandomProduct(conn);
+			System.out.println("danh sach sanpham o home");
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -52,12 +51,11 @@ public class SlideListServlet extends HttpServlet {
 			e.printStackTrace();
 		} 
 
-		request.setAttribute("SlideListServlet", list);
+		request.setAttribute("ProductListServlet", list);
 		
 		  RequestDispatcher dispatcher =
-		  request.getServletContext().getRequestDispatcher("/views/slider.jsp");
+		  request.getServletContext().getRequestDispatcher("/views/product.jsp");
 		  dispatcher.include(request, response);
-		 
 	}
 
 	/**

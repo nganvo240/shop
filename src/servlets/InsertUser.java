@@ -1,6 +1,5 @@
 package servlets;
 
-import java.awt.Component;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JOptionPane;
-import javax.swing.JFrame;
-
+/*import javax.swing.JFrame;
+*/
 import beans.user;
-import utils.DBUtils;
+import utils.DBuser;
 import utils.MyUtils;
 
 /**
@@ -24,7 +23,7 @@ import utils.MyUtils;
 @WebServlet("/InsertUser")
 public class InsertUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
+	
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -63,7 +62,7 @@ public class InsertUser extends HttpServlet {
         String errorString = null;
         
         try {
-            DBUtils.insertUser(conn, u);
+            DBuser.insertUser(conn, u);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -75,21 +74,24 @@ public class InsertUser extends HttpServlet {
         // Nếu có lỗi
         if (errorString != null) {
 			
-        	System.out.println("thêm thất bại");
-        	RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/views/login.jsp");
-            dispatcher.forward(request, response);
+        	System.out.println("thêm user thất bại");
+			
+			  RequestDispatcher dispatcher = request.getServletContext()
+			  .getRequestDispatcher("/views/login.jsp"); dispatcher.forward(request,
+			  response);
+			 
         	JOptionPane.showMessageDialog(null,"Thực hiện thất bại");
         	
         }
         // Nếu mọi thứ tốt đẹp.
         else {
         	JOptionPane.showMessageDialog(null,"Thực hiện thành công");
-        	System.out.println("thêm thành công");
-        	RequestDispatcher dispatcher = request.getServletContext()
-                    .getRequestDispatcher("/views/login.jsp");
-            dispatcher.forward(request, response);
-        	
+        	System.out.println("thêm user thành công");
+			/*
+			 * RequestDispatcher dispatcher = request.getServletContext()
+			 * .getRequestDispatcher("/views/login.jsp"); dispatcher.forward(request,
+			 * response);
+			 */
         }
 	}
 
