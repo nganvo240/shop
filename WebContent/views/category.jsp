@@ -15,7 +15,7 @@
 							<c:forEach  items="${TypetListServlet}" var="item" varStatus="loop">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h4 class="panel-title"><a href="#">${ item.name}</a></h4>
+										<input type="checkbox" name=${ item.name} />  <span class="panel-title"><a href="#">${ item.name}</a></span>									
 									</div>
 								</div>
 							</c:forEach>							

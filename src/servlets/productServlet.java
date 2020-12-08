@@ -19,7 +19,7 @@ import utils.MyUtils;
 /**
  * Servlet implementation class productServlet
  */
-@WebServlet("/productServlet")
+@WebServlet("/product")
 public class productServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,8 +40,7 @@ public class productServlet extends HttpServlet {
 		String errorString = null;
 		List<product> list = null;
 		try {
-			list = DBproduct.listRandomProduct(conn);
-			System.out.println("danh sach sanpham o home");
+			list = DBproduct.listProduct(conn);
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -50,12 +49,13 @@ public class productServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
+		int countProduct= list.size();
+		request.setAttribute("countProd", countProduct);
+		
 		request.setAttribute("ProductListServlet", list);
 		
-		  RequestDispatcher dispatcher =
-		  request.getServletContext().getRequestDispatcher("/views/product.jsp");
-		  dispatcher.include(request, response);
+		  RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/product.jsp");
+		  dispatcher.forward(request, response);
 	}
 
 	/**

@@ -14,7 +14,7 @@ public class DBcategory {
 	public static List<type> listType(Connection conn)
 			throws SQLException, ClassNotFoundException
 	{
-		String sql="select * from category";
+		String sql="select * from type";
 		PreparedStatement pstm =conn.prepareStatement(sql);
 		
 		ResultSet rs = pstm.executeQuery();
