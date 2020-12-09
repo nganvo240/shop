@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.branch;
 import beans.product;
 import beans.type;
 import utils.DBcategory;
@@ -40,10 +41,11 @@ public class categoryServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
 		String errorString = null;
-		List<type> list = null;
+		List<type> listType = null;
+		List<branch> listBranch = null;
 		try {
-			list = DBcategory.listType(conn);
-			System.out.println("loai o home");
+			listType = DBcategory.listType(conn);
+			listBranch= DBcategory.listBranch(conn);		
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -53,7 +55,8 @@ public class categoryServlet extends HttpServlet {
 			e.printStackTrace();
 		} 
 
-		request.setAttribute("TypetListServlet", list);
+		request.setAttribute("TypetListServlet", listType);
+		request.setAttribute("BranchtListServlet", listBranch);
 		
 		  RequestDispatcher dispatcher =
 		  request.getServletContext().getRequestDispatcher("/views/category.jsp");

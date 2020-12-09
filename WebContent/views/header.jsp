@@ -5,6 +5,13 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">	
 </head>
 <body>
 	<header id="header"><!--header-->
@@ -37,42 +44,19 @@
 					<div class="col-md-4 clearfix">
 						<div class="logo pull-left">
 							<a href="${pageContext.request.contextPath}/home"><img src="images/home/logo.png" alt="" /></a>
-						</div>
-						<!-- <div class="btn-group pull-right clearfix">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="">Canada</a></li>
-									<li><a href="">UK</a></li>
-								</ul>
-							</div>
-							
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="">Canadian Dollar</a></li>
-									<li><a href="">Pound</a></li>
-								</ul>
-							</div>
-						</div> -->
+						</div>					
 					</div>
+					<form method="POST" action="${pageContext.request.contextPath}/login">
 					<div class="col-md-8 clearfix">
 						<div class="shop-menu clearfix pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-								<!-- <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li> -->
-								<!-- <li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li> -->
+							<ul class="nav navbar-nav">								
+								<li><a><i class="fa fa-user"></i>Account: ${ usernameLogin}</a></li>																
 								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div><!--/header-middle-->
@@ -92,16 +76,10 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="${pageContext.request.contextPath}/home" class="active">Trang chủ</a></li>
-								<li><a href="${pageContext.request.contextPath}/product">Sản phẩm</a>                                  
-                                </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.jsp">Blog Single</a></li>
-                                    </ul>
-                                </li> 
-								<li><a href="404.jsp">404</a></li>
-								<li><a href="contact-us.jsp">Contact</a></li>
+								<li><a href="${pageContext.request.contextPath}/product">Sản phẩm</a> </li> 
+								<li> <a href="#">Best Seller</a> </li> 
+								<li><a href="404.jsp">Sales off</a></li>
+								<li><a href="contact-us.jsp">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>

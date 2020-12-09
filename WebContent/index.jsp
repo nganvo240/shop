@@ -129,7 +129,7 @@
 						</div>
 					</div><!--/recommended_items-->
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Sản phẩm nổi bật</h2>			
+						<h2 class="title text-center">Sản phẩm nổi bật</h2>									
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
 							<div class="col-sm-4">
 							<div class="product-image-wrapper">

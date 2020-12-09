@@ -25,10 +25,13 @@
 							<h2>Thương hiệu</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(50)</span>Nike</a></li>
+									<c:forEach  items="${BranchtListServlet}" var="item" varStatus="loop">									
+											<li><a href="#"> <span class="pull-right">(50)</span>${ item.name}</a></li>
+									</c:forEach>	
+									<!-- <li><a href="#"> <span class="pull-right">(50)</span>Nike</a></li>
 									<li><a href="#"> <span class="pull-right">(56)</span>Bitis</a></li>
 									<li><a href="#"> <span class="pull-right">(27)</span>Adidas</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>Puma</a></li>
+									<li><a href="#"> <span class="pull-right">(32)</span>Puma</a></li> -->
 									
 								</ul>
 							</div>

@@ -10,25 +10,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-/*import javax.swing.JFrame;
-*/
+
 import beans.user;
 import utils.DBuser;
 import utils.MyUtils;
 
 /**
- * Servlet implementation class InsertUser
+ * Servlet implementation class registerServlet
  */
-@WebServlet("/InsertUser")
-public class InsertUser extends HttpServlet {
+@WebServlet("/register")
+public class registerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertUser() {
+    public registerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,6 +35,7 @@ public class InsertUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -46,52 +44,48 @@ public class InsertUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
-		 
-        String username= (String)request.getParameter("username");
-        String pass = (String) request.getParameter("password");
-        String email = (String) request.getParameter("email");
+		//Đăng ký
+        String usernameRegister = (String)request.getParameter("usernameRegister");
+        String passRegister = (String) request.getParameter("passwordRegister");
+        String email = (String) request.getParameter("emailRegister");
         String roleStr = "1";//phân quyền người dùng =1
+        int testRegister = 0;
         
-        int role = 0;
+        int role = 0;       
         try {
         	role = Integer.parseInt(roleStr);//đổi id từ string sang int
-        } catch (Exception e) {
-        }
-        user u = new user(username, pass, email, role);
- 
-        String errorString = null;
-        
+        } 
+        catch (Exception e) {
+        }        
+        user u = new user(usernameRegister, passRegister, email, role);
+        String errorStringRegister = null;        
         try {
             DBuser.insertUser(conn, u);
         } catch (SQLException e) {
             e.printStackTrace();
-            errorString = e.getMessage();
+            errorStringRegister = e.getMessage();
         }
+               
         // Lưu thông tin vào request attribute trước khi forward sang views.
-        request.setAttribute("errorString", errorString);
+        request.setAttribute("errorStringRegister", errorStringRegister);
         request.setAttribute("user", u);
  
         // Nếu có lỗi
-        if (errorString != null) {
-			
+        if (errorStringRegister != null) {
+        	testRegister = 1;
+        	request.setAttribute("testRegister", testRegister);
         	System.out.println("thêm user thất bại");
-			
-			  RequestDispatcher dispatcher = request.getServletContext()
-			  .getRequestDispatcher("/views/login.jsp"); dispatcher.forward(request,
-			  response);
-			 
-        	JOptionPane.showMessageDialog(null,"Thực hiện thất bại");
+        	RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
+    		dispatcher.forward(request, response);
         	
         }
         // Nếu mọi thứ tốt đẹp.
-        else {
-        	JOptionPane.showMessageDialog(null,"Thực hiện thành công");
+        else { 
+        	testRegister = 2;
+        	request.setAttribute("testRegister", testRegister);
         	System.out.println("thêm user thành công");
-			/*
-			 * RequestDispatcher dispatcher = request.getServletContext()
-			 * .getRequestDispatcher("/views/login.jsp"); dispatcher.forward(request,
-			 * response);
-			 */
+        	RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
+    		dispatcher.forward(request, response);
         }
 	}
 

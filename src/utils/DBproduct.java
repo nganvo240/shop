@@ -27,6 +27,8 @@ public class DBproduct {
 			String detail =  rs.getString("detail");
 			int price_new = rs.getInt("price_new");
 			String img = rs.getString("img");
+			int type_id = rs.getInt("type_id");
+			int branch_id = rs.getInt("branch_id");
 			
 			product s = new product();
 			s.setId(id);
@@ -36,13 +38,15 @@ public class DBproduct {
 			s.setDetail(detail);
 			s.setPrice_new(price_new);
 			s.setImg(img);
+			s.setType_id(type_id);
+			s.setBranch_id(branch_id);
 			
 			list.add(s);
 		}
 		System.out.println("get list product from DB");
 		return list;	
 	}
-	private static int countGlobalVar=0;
+
 	public static List<product> listProduct(Connection conn)
 			throws SQLException, ClassNotFoundException
 	{
@@ -60,6 +64,8 @@ public class DBproduct {
 			String detail =  rs.getString("detail");
 			int price_new = rs.getInt("price_new");
 			String img = rs.getString("img");
+			int type_id = rs.getInt("type_id");
+			int branch_id = rs.getInt("branch_id");
 			
 			product s = new product();
 			s.setId(id);
@@ -69,22 +75,13 @@ public class DBproduct {
 			s.setDetail(detail);
 			s.setPrice_new(price_new);
 			s.setImg(img);
+			s.setType_id(type_id);
+			s.setBranch_id(branch_id);
 			
 			list.add(s);
 		}	
-		countGlobalVar=list.size();
 		return list;
 		
 	}
-	public int getCount() {
-		return countGlobalVar;
-	}
-	public List<product> getListProductByPagination(List<product> list, int start, int end)
-	{
-		List<product> result = new ArrayList<product>();
-		for (int i=start; i<end ;i++) {
-			result.add(list.get(i));
-		}
-		return result;
-	}
+	
 }

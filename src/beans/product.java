@@ -8,10 +8,12 @@ public class product {
 	private String detail;
 	private int price_new;
 	private String img;
+	private int type_id;
+	private int branch_id;
 public product() {
 		
 	}
-	public product(int id, String name, int price, String status, String detail, int price_new, String img )
+	public product(int id, String name, int price, String status, String detail, int price_new, String img, int type_id, int branch_id )
 	{
 		super();
 		this.setId(id);
@@ -21,6 +23,8 @@ public product() {
 		this.setDetail(detail);
 		this.setPrice_new(price_new);
 		this.setImg(img);
+		this.setType_id(type_id);
+		this.setBranch_id(branch_id);
 	}
 	public int getId() {
 		return id;
@@ -63,5 +67,17 @@ public product() {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public int getType_id() {
+		return type_id;
+	}
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
+	}
+	public int getBranch_id() {
+		return branch_id;
+	}
+	public void setBranch_id(int branch_id) {
+		this.branch_id = branch_id;
 	}
 }

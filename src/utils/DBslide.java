@@ -33,7 +33,6 @@ public class DBslide {
 			
 			list.add(s);
 		}
-		System.out.println("get list slide from DB");
 		return list;
 		
 	}

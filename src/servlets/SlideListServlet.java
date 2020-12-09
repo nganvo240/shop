@@ -42,7 +42,6 @@ public class SlideListServlet extends HttpServlet {
 		List<slide> list = null;
 		try {
 			list = DBslide.listSlide(conn);
-			System.out.println("danh sach slide");
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
