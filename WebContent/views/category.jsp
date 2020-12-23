@@ -15,27 +15,13 @@
 							<c:forEach  items="${TypetListServlet}" var="item" varStatus="loop">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<input type="checkbox" name=${ item.name} />  <span class="panel-title"><a href="#">${ item.name}</a></span>									
+										<input type="radio" name="" > <span class="panel-title"><a href="">${ item.name}</a></span>									
 									</div>
 								</div>
-							</c:forEach>							
+							</c:forEach><br>	
+									<INPUT TYPE="submit" VALUE="submit" />						
 						</div><!--/category-products-->
 					
-						<div class="brands_products"><!--brands_products-->
-							<h2>Thương hiệu</h2>
-							<div class="brands-name">
-								<ul class="nav nav-pills nav-stacked">
-									<c:forEach  items="${BranchtListServlet}" var="item" varStatus="loop">									
-											<li><a href="#"> <span class="pull-right">(50)</span>${ item.name}</a></li>
-									</c:forEach>	
-									<!-- <li><a href="#"> <span class="pull-right">(50)</span>Nike</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>Bitis</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>Adidas</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>Puma</a></li> -->
-									
-								</ul>
-							</div>
-						</div><!--/brands_products-->
 						
 						<div class="price-range"><!--price-range-->
 							<h2>Giá</h2>

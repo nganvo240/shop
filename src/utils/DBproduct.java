@@ -1,5 +1,6 @@
 package utils;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beans.product;
+import beans.product_detail;
 
 public class DBproduct {
 	public static List<product> listRandomProduct(Connection conn)
@@ -23,27 +25,20 @@ public class DBproduct {
 			int id = rs.getInt("id");
 			String name = rs.getString("name");			
 			int price = rs.getInt("price");
-			String status = rs.getString("status");
 			String detail =  rs.getString("detail");
-			int price_new = rs.getInt("price_new");
 			String img = rs.getString("img");
 			int type_id = rs.getInt("type_id");
-			int branch_id = rs.getInt("branch_id");
 			
 			product s = new product();
 			s.setId(id);
 			s.setName(name);
 			s.setPrice(price);
-			s.setStatus(status);
 			s.setDetail(detail);
-			s.setPrice_new(price_new);
 			s.setImg(img);
 			s.setType_id(type_id);
-			s.setBranch_id(branch_id);
 			
 			list.add(s);
 		}
-		System.out.println("get list product from DB");
 		return list;	
 	}
 
@@ -60,28 +55,74 @@ public class DBproduct {
 			int id = rs.getInt("id");
 			String name = rs.getString("name");			
 			int price = rs.getInt("price");
-			String status = rs.getString("status");
 			String detail =  rs.getString("detail");
-			int price_new = rs.getInt("price_new");
 			String img = rs.getString("img");
 			int type_id = rs.getInt("type_id");
-			int branch_id = rs.getInt("branch_id");
+
 			
 			product s = new product();
 			s.setId(id);
 			s.setName(name);
 			s.setPrice(price);
-			s.setStatus(status);
 			s.setDetail(detail);
-			s.setPrice_new(price_new);
 			s.setImg(img);
 			s.setType_id(type_id);
-			s.setBranch_id(branch_id);
 			
 			list.add(s);
 		}	
 		return list;
 		
 	}
+	public static product findProduct(Connection conn, int idIn) throws SQLException, ClassNotFoundException {
+        String sql = "select p.id,p.name,price,detail,img, t.name as type_name from product p, Type t where p.type_id=t.id and p.id=?";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, idIn);
+        ResultSet rs = pstm.executeQuery();
+ 
+        while (rs.next()) {
+        	int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int price = rs.getInt("price");           
+            String detail = rs.getString("detail");
+            String img = rs.getString("img");
+            String t_name = rs.getString("type_name");
+            
+            product p = new product(id,  name,  price,  detail,  img,  t_name);
+            return p;
+        }
+        System.out.println("còn null");
+        return null;
+    }
+	public static int amountProduct(Connection conn, int  id, int  size) throws SQLException {
+        String sql = "select quantity from product_detail where id_product=? and size=?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
+        pstm.setInt(2, size);
+        ResultSet rs = pstm.executeQuery();
+		rs.next();
+	     // lấy giá trị đầu tiên trong bảng (Vị trí 1 theo thiết kế của bảng)
+		System.out.println(rs.getInt(1));
+	    return rs.getInt(1);            
+    } 
+	public static List<product_detail> sizeOfProduct(Connection conn, int  idPro)throws SQLException, ClassNotFoundException{
+		String sql = "select size,quantity from product_detail where id_product=?";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, idPro);
+        ResultSet rs = pstm.executeQuery();
+        List<product_detail> list = new ArrayList<product_detail>();
+		while (rs.next()) 
+		{
+			int size = rs.getInt("size");
+			int quantity = rs.getInt("quantity");
+			
+			product_detail p = new product_detail();
+			p.setSize(size);
+			p.setQuantity(quantity);
+			
+			list.add(p);
+		}	
+		return list;
+    }
 	
 }

@@ -22,7 +22,7 @@
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
 
-
+<!-- xử lý phân trang -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
         <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
         <!-- JS tạo nút bấm di chuyển trang start -->
@@ -31,7 +31,7 @@
         <% int countProd = (Integer) request.getAttribute("countProd"); %>
         <script type="text/javascript">
             $(function () {
-                var pageSize = 9; // Hiển thị 6 sản phẩm trên 1 trang
+                var pageSize = 9; // Hiển thị 9 sản phẩm trên 1 trang
                 showPage = function (page) {
                     $(".contentPage").hide();
                     $(".contentPage").each(function (n) {
@@ -102,8 +102,8 @@
 										<!-- hiệu ứng khi lướt chuột qua sản phẩm -->										
 										<div class="product-overlay">
 											<div class="overlay-content">
-												<p>${ item.name}</p>
-												<a href="#" class="btn btn-default add-to-cart">Xem</a>
+												<p>${ item.name}</p>										
+												<a href="product_detail?id=${item.id}" class="btn btn-default add-to-cart">Xem</a>											
 											</div>
 										</div>
 								</div>

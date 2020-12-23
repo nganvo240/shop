@@ -3,16 +3,14 @@ package beans;
 public class type {
 	private String name;
 	private int id;
-	private String link;
 public type() {
 		
 	}
-	public type(String name, String link, int id )
+	public type(String name, int id )
 	{
 		super();
 		this.setId(id);
 		this.setName(name);
-		this.setLink(link);
 	}
 	public String getName() {
 		return name;
@@ -26,10 +24,5 @@ public type() {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
+
 }
