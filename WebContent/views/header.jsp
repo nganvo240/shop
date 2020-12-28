@@ -5,13 +5,61 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/price-range.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">	
+	<link href="css/responsive.css" rel="stylesheet">
+<!-- xử lý thanh cuộn chuyển qua lại các tin (jquery) -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+<style>
+body {
+  font-family: Arial;
+}
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 12px;
+  border: none;
+  float: left;
+  height: 25px;
+  width: 180px;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  height: 25px;
+  width: 19%;
+  padding-top: 6px;
+  background: #FE980F;
+  color: white;
+  font-size: 12px;
+  border: none;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #FE980F;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
 </head>
 <body>
 	<header id="header"><!--header-->
@@ -52,7 +100,7 @@
 						<div class="shop-menu clearfix pull-right">
 							<ul class="nav navbar-nav">								
 								<li><a><i class="fa fa-user"></i>Account: ${ usernameLogin}</a></li>																
-								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart:1</a></li>
 								<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
@@ -76,22 +124,28 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="${pageContext.request.contextPath}/home" class="active">Trang chủ</a></li>
-								<li><a href="${pageContext.request.contextPath}/product">Sản phẩm</a> </li> 
-								<li> <a href="#">Best Seller</a> </li> 
-								<li><a href="404.jsp">Sales off</a></li>
-								<li><a href="contact-us.jsp">Liên hệ</a></li>
+								<li><a href="${pageContext.request.contextPath}/home" >Trang chủ</a></li>
+								<li><a href="${pageContext.request.contextPath}/product" >Sản phẩm</a> </li>  
+								<!-- <li><a href="#">Sales off</a></li> -->
+								<li><a href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
+						<form method="GET" action="${pageContext.request.contextPath}/searchResultsServlet" class="example" style="margin:auto; max-width:300px">
+							  <input type="text" placeholder="Tên sản phẩm..." name="search" value="">
+							  <button type="submit"><i class="fa fa-search"></i></button>
+							</form>
 					</div>
 				</div>
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
+<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

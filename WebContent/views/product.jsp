@@ -24,58 +24,13 @@
 
 <!-- xử lý phân trang -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
-        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
-        <!-- JS tạo nút bấm di chuyển trang start -->
-        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
-        <!-- JS tạo nút bấm di chuyển trang end -->
-        <% int countProd = (Integer) request.getAttribute("countProd"); %>
-        <script type="text/javascript">
-            $(function () {
-                var pageSize = 9; // Hiển thị 9 sản phẩm trên 1 trang
-                showPage = function (page) {
-                    $(".contentPage").hide();
-                    $(".contentPage").each(function (n) {
-                        if (n >= pageSize * (page - 1) && n < pageSize * page)
-                            $(this).show();
-                    });
-                }
-                showPage(1);
-                ///** Cần truyền giá trị vào đây **///
-                var totalRows = <%= countProd%>; // Tổng số sản phẩm hiển thị
-                var btnPage = 5; // Số nút bấm hiển thị di chuyển trang
-                var iTotalPages = Math.ceil(totalRows / pageSize);
-
-                var obj = $('#pagination').twbsPagination({
-                    totalPages: iTotalPages,
-                    visiblePages: btnPage,
-                    onPageClick: function (event, page) {
-                        console.info(page);
-                        showPage(page);
-                    }
-                });
-                console.info(obj.data());
-            });
-        </script>      
-        <style>
+   
+<style>
 	#pagination {
 	  	display: flex;
     	justify-content: center;
    		
 	}
-	/* script không nhận dưới này */
-	/* .pagination a {
-	  color: black;
-	  float: left;
-	  padding: 8px 16px;
-	  text-decoration: none;
-	}
-	
-	.pagination a.active {
-	  background-color: #FFA500;
-	  color: white;
-	}
-	
-	.pagination a:hover:not(.active) {background-color: #ddd;} */
 </style>
 </head>
 
@@ -123,5 +78,46 @@
 		</div>
 	</section>			
 	<jsp:include page="/views/footer.jsp"></jsp:include>
+<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="js/gmaps.js"></script>
+	<script src="js/contact.js"></script>
+	<script src="js/price-range.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.js" ></script>
+        <!-- JS tạo nút bấm di chuyển trang start -->
+        <script src="http://1892.yn.lt/blogger/JQuery/Pagging/js/jquery.twbsPagination.js" type="text/javascript"></script>
+        <!-- JS tạo nút bấm di chuyển trang end -->
+        <% int countProd = (Integer) request.getAttribute("countProd"); %>
+        <script type="text/javascript">
+            $(function () {
+                var pageSize = 9; // Hiển thị 9 sản phẩm trên 1 trang
+                showPage = function (page) {
+                    $(".contentPage").hide();
+                    $(".contentPage").each(function (n) {
+                        if (n >= pageSize * (page - 1) && n < pageSize * page)
+                            $(this).show();
+                    });
+                }
+                showPage(1);
+                ///** Cần truyền giá trị vào đây **///
+                var totalRows = <%= countProd%>; // Tổng số sản phẩm hiển thị
+                var btnPage = 5; // Số nút bấm hiển thị di chuyển trang
+                var iTotalPages = Math.ceil(totalRows / pageSize);
+
+                var obj = $('#pagination').twbsPagination({
+                    totalPages: iTotalPages,
+                    visiblePages: btnPage,
+                    onPageClick: function (event, page) {
+                        console.info(page);
+                        showPage(page);
+                    }
+                });
+                console.info(obj.data());
+            });
+        </script>   
 </body>
 </html>

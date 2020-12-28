@@ -39,6 +39,8 @@ public class categoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
+		String btnType = (String) request.getParameter("btnType");
+		String btnRadioPrice = (String) request.getParameter("btnRadioPrice");
 		String errorString = null;
 		List<type> listType = null;
 		try {
@@ -53,9 +55,10 @@ public class categoryServlet extends HttpServlet {
 		} 
 
 		request.setAttribute("TypetListServlet", listType);
+		request.setAttribute("x", btnType);
+		request.setAttribute("btnRadioPrice", btnRadioPrice);
 		
-		  RequestDispatcher dispatcher =
-		  request.getServletContext().getRequestDispatcher("/views/category.jsp");
+		  RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/category.jsp");
 		  dispatcher.include(request, response);
 	}
 

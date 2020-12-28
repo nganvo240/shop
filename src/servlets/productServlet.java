@@ -40,7 +40,7 @@ public class productServlet extends HttpServlet {
 		String errorString = null;
 		List<product> list = null;
 		try {
-			list = DBproduct.listProduct(conn);
+			list = DBproduct.listProduct(conn, "all");
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -49,9 +49,13 @@ public class productServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		//sửa lỗi tiếng việt
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
+        
 		int countProduct= list.size();
 		request.setAttribute("countProd", countProduct);
-		
+		System.out.println(countProduct+"*************");
 		request.setAttribute("ProductListServlet", list);
 		
 		  RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/product.jsp");

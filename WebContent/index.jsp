@@ -21,6 +21,8 @@
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    
+    
 </head>
 <body>
 	<jsp:include page="/views/header.jsp"></jsp:include>
@@ -29,9 +31,19 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<jsp:include page="categoryServlet" />
+				<div class="col-sm-3">
+						<div class="left-sidebar">
+								<div class="shipping text-center"><!--shipping-->
+												<img src="images/home/tet1.jpg" alt="" />
+											</div><!--/shipping-->
+								<div class="shipping text-center"><!--shipping-->
+										<img src="images/home/shipping.jpg" alt="" />
+									</div><!--/shipping-->
+									
+						</div>
+				</div>
 				<!-- nội dung hiển thị sản phẩm -->
-				<div class="col-sm-9 padding-right">				
+				<div class="col-sm-9 padding-left">	<!-- col-sm-9 padding-left :tạm thời-->			
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Sản phẩm nổi bật</h2>									
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
@@ -53,19 +65,33 @@
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a></li>
-									</ul>																												
+										<li id="moo" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</li>
+									</ul>		
+																														
+								</div>							
 								</div>
-								</div>
-							</div>
-																															    
+							</div>																															    
 						</c:forEach>
 				</div>
-				</div>	
+				</div>
+					
+				<div class="shipping text-center"><!--shipping-->
+							<img src="images/home/shipping.jpg" alt="" />
+						</div><!--/shipping-->
 				<!-- kết thúc nội dung hiển thị sản phẩm -->
 			</div>
 		</div>
 	</section>
 	<jsp:include page="/views/footer.jsp"></jsp:include>
+<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+<script>
+setTimeout( function ( ) { alert( "moo" ); }, 10 );
+</script>    
+
 </body>
 </html>

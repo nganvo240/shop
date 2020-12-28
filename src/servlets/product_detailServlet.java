@@ -45,12 +45,12 @@ public class product_detailServlet extends HttpServlet {
         String sizeStr = (String) request.getParameter("itemSize.size");
         System.out.println(idStr+" va "+sizeStr);
         int id = 0;
-        int size=0;
+		/* int size=0; */
         int amountProduct=0;
         List<product_detail> lstsize=null;
         try {
             id = Integer.parseInt(idStr);
-            size = Integer.parseInt(sizeStr);
+			/* size = Integer.parseInt(sizeStr); */
         } catch (Exception e) {
         }
         product p = null;
@@ -66,12 +66,11 @@ public class product_detailServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
                   
-        try {
-			amountProduct = DBproduct.amountProduct(conn, id, size);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}       
+		/*
+		 * try { amountProduct = DBproduct.amountProduct(conn, id, size); } catch
+		 * (SQLException e1) { // TODO Auto-generated catch block e1.printStackTrace();
+		 * }
+		 */     
               
         try {
 			lstsize = DBproduct.sizeOfProduct(conn, id);
@@ -91,7 +90,7 @@ public class product_detailServlet extends HttpServlet {
         request.setAttribute("errorString", errorString);
         request.setAttribute("product", p);
         request.setAttribute("lstsize", lstsize);
-        request.setAttribute("amountProduct", amountProduct);
+		/* request.setAttribute("amountProduct", amountProduct); */
         
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/views/product_detail.jsp");
@@ -100,30 +99,7 @@ public class product_detailServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/*
-		 * Connection conn = MyUtils.getStoredConnection(request);
-		 * 
-		 * String idStr= (String)request.getParameter("id"); String hoten = (String)
-		 * request.getParameter("hoten"); String diachi = (String)
-		 * request.getParameter("diachi"); int id = 0; try { id =
-		 * Integer.parseInt(idStr); } catch (Exception e) { } SinhVien sv = new
-		 * SinhVien(id, hoten, diachi);
-		 * 
-		 * String errorString = null;
-		 * 
-		 * try { DBUtils.updateSinhVien(conn, sv); } catch (SQLException e) {
-		 * e.printStackTrace(); errorString = e.getMessage(); } // Lưu thông tin vào
-		 * request attribute trước khi forward sang views.
-		 * request.setAttribute("errorString", errorString);
-		 * request.setAttribute("sinhvien", sv);
-		 * 
-		 * // Nếu có lỗi forward sang trang edit. if (errorString != null) {
-		 * RequestDispatcher dispatcher = request.getServletContext()
-		 * .getRequestDispatcher("/WEB-INF/views/editSinhVienView.jsp");
-		 * dispatcher.forward(request, response); } // Nếu mọi thứ tốt đẹp. // Redirect
-		 * sang trang danh sách sản phẩm. else {
-		 * response.sendRedirect(request.getContextPath() + "/sinhvienList"); }
-		 */
+
     }
 
 }

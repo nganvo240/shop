@@ -42,10 +42,11 @@ public class DBproduct {
 		return list;	
 	}
 
-	public static List<product> listProduct(Connection conn)
+	public static List<product> listProduct(Connection conn, String x)
 			throws SQLException, ClassNotFoundException
 	{
-		String sql="select * from product";
+		String sql = "select * from product " + CommandSQL_Price(x);
+		sql = sql.replace("{and}", "");
 		PreparedStatement pstm =conn.prepareStatement(sql);
 		
 		ResultSet rs = pstm.executeQuery();
@@ -59,6 +60,79 @@ public class DBproduct {
 			String img = rs.getString("img");
 			int type_id = rs.getInt("type_id");
 
+			
+			product s = new product();
+			s.setId(id);
+			s.setName(name);
+			s.setPrice(price);
+			s.setDetail(detail);
+			s.setImg(img);
+			s.setType_id(type_id);
+			
+			list.add(s);
+		}	
+		return list;
+		
+	}
+	public static List<product> listProduct_Nam(Connection conn, String x)
+			throws SQLException, ClassNotFoundException
+	{
+		String sql="select * from product where type_id=1 "+ CommandSQL_Price(x);;
+		PreparedStatement pstm =conn.prepareStatement(sql);
+		
+		ResultSet rs = pstm.executeQuery();
+		List<product> list = new ArrayList<product>();
+		while (rs.next()) 
+		{
+			int id = rs.getInt("id");
+			String name = rs.getString("name");			
+			int price = rs.getInt("price");
+			String detail =  rs.getString("detail");
+			String img = rs.getString("img");
+			int type_id = rs.getInt("type_id");
+			
+			product s = new product();
+			s.setId(id);
+			s.setName(name);
+			s.setPrice(price);
+			s.setDetail(detail);
+			s.setImg(img);
+			s.setType_id(type_id);
+			
+			list.add(s);
+		}	
+		return list;
+		
+	}
+	public static String  CommandSQL_Price(String x) {
+		String result = "";
+		if (x.equals("1M")) {
+			result="and price > 1000000";
+		}
+		else if (x.equals("500K-1M")) {
+			result="and price between 500000 and 1000000 ";
+		}
+		else if (x.equals("500K")) {
+			result="and price < 500000";
+		}
+		
+		return result;
+	}
+	public static List<product> listProduct_Nu(Connection conn, String x)
+			throws SQLException, ClassNotFoundException{
+		String sql="select * from product where type_id=2 "+ CommandSQL_Price(x);
+		PreparedStatement pstm =conn.prepareStatement(sql);
+
+		ResultSet rs = pstm.executeQuery();
+		List<product> list = new ArrayList<product>();
+		while (rs.next()) 
+		{
+			int id = rs.getInt("id");
+			String name = rs.getString("name");			
+			int price = rs.getInt("price");
+			String detail =  rs.getString("detail");
+			String img = rs.getString("img");
+			int type_id = rs.getInt("type_id");
 			
 			product s = new product();
 			s.setId(id);
@@ -91,20 +165,9 @@ public class DBproduct {
             product p = new product(id,  name,  price,  detail,  img,  t_name);
             return p;
         }
-        System.out.println("còn null");
+        
         return null;
     }
-	public static int amountProduct(Connection conn, int  id, int  size) throws SQLException {
-        String sql = "select quantity from product_detail where id_product=? and size=?";
-        PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setInt(1, id);
-        pstm.setInt(2, size);
-        ResultSet rs = pstm.executeQuery();
-		rs.next();
-	     // lấy giá trị đầu tiên trong bảng (Vị trí 1 theo thiết kế của bảng)
-		System.out.println(rs.getInt(1));
-	    return rs.getInt(1);            
-    } 
 	public static List<product_detail> sizeOfProduct(Connection conn, int  idPro)throws SQLException, ClassNotFoundException{
 		String sql = "select size,quantity from product_detail where id_product=?";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -124,5 +187,34 @@ public class DBproduct {
 		}	
 		return list;
     }
+	public static List<product> listProduct_search(Connection conn, String key)
+			throws SQLException, ClassNotFoundException
+	{
+		String sql="select * from product where name like N'%" +key+"%'";
+		PreparedStatement pstm =conn.prepareStatement(sql);
+		ResultSet rs = pstm.executeQuery();
+		List<product> list = new ArrayList<product>();
+		while (rs.next()) 
+		{
+			int id = rs.getInt("id");
+			String name = rs.getString("name");			
+			int price = rs.getInt("price");
+			String detail =  rs.getString("detail");
+			String img = rs.getString("img");
+			int type_id = rs.getInt("type_id");
+			
+			product s = new product();
+			s.setId(id);
+			s.setName(name);
+			s.setPrice(price);
+			s.setDetail(detail);
+			s.setImg(img);
+			s.setType_id(type_id);
+			
+			list.add(s);
+		}	
+		return list;
+		
+	}
 	
 }

@@ -26,7 +26,7 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="images/product-details/1.jpg" alt="" />
+								<img src="${product.img}" alt="" />
 							</div>
 						</div>
 			
@@ -34,7 +34,8 @@
 							<div class="product-information"><!--/product-information-->				
 								<h2>${product.name}</h2>
 								<span>
-									<span><fmt:formatNumber type="number" groupingUsed="true" value="${ product.price}"/>đ</span><br><br><br>																									
+									<span><fmt:formatNumber type="number" groupingUsed="true" value="${ product.price}"/>đ</span><br><br><br>
+									<p style="justify">${product.detail}</p><br>																										
 									<label>								
 									   <select class="select" style="width: auto;" size="1" name="options" >	
 									   <option >Chọn Size</option>								   
@@ -42,18 +43,23 @@
 										     <option value="${itemSize.size}" data-max="${itemSize.quantity}">${itemSize.size}</option>				   										     			
 										    </c:forEach>											    						 
 									   </select>
-										     Số lượng: <input type="number" class="qty" name="qty" min="0" max="0"/>										   										   		
+										     Số lượng: <input type="number"  min="0" max="0" value="0"/>										   										   		
 								</label><br><br>
 								</span>								
-								<div class="header-middle"><!--header-middle-->							
-							<!-- <p><b>Tình trạng:</b> Còn hàng</p> -->
-								<p><b>Loại:</b> ${product.type_name}</p><br>
-								<button type="button" class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>								
+								<div class="header-middle"><!--header-middle-->										
+									<c:if test="${not empty lstsize}">
+										<p><b>Tình trạng:</b> Còn hàng</p>
+									</c:if>						
+									<c:if test="${empty lstsize}">
+										<p><b>Tình trạng:</b> Hết hàng</p>
+									</c:if>	
+									<p><b>Loại:</b> ${product.type_name}</p><br>
+									<button type="button" class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>								
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
 				
-					<div class="category-tab shop-details-tab"><!--category-tab-->
+					<%-- <div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								<li><span data-toggle="tab">Chi tiết</span></li>
@@ -64,7 +70,7 @@
 									<p>${product.detail}</p>	
 								</div>									
 						</div>
-					</div>
+					</div> --%>
 			</div>
 		</div>
 	</div>
@@ -73,7 +79,10 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script type="text/javascript">
 $('select').change(function(){
+	
     $('input[type=number]').attr('max', $(this).find(":selected").data('max'));
+    $('input[type=number]').val(''); 
+
 });
 </script>
 </body>
