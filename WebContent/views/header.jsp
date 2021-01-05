@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,13 +96,20 @@ form.example::after {
 							<a href="${pageContext.request.contextPath}/home"><img src="images/home/logo.png" alt="" /></a>
 						</div>					
 					</div>
-					<form method="POST" action="${pageContext.request.contextPath}/login">
+					<form method="GET" action="header">
 						<div class="col-md-8 clearfix">
 							<div class="shop-menu clearfix pull-right">
 								<ul class="nav navbar-nav">								
-									<li><a href="${pageContext.request.contextPath}/account"><i class="fa fa-user"></i>Account: ${ usernameLogin}</a></li>																
-									<li><a href="${pageContext.request.contextPath}/cart"><i class="fa fa-shopping-cart"></i> Cart:1</a></li>
-									<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> Login</a></li>
+									<li><a href="${pageContext.request.contextPath}/account"><i class="fa fa-user"></i>Tài khoản: ${usernameLogin}</a></li>																
+									<li><a href="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}"><i class="fa fa-shopping-cart"></i> Giỏ hàng:1</a></li>
+									<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> 
+										<c:if test="${not empty usernameLogin }">
+											Đăng xuất
+										</c:if>
+										<c:if test="${empty usernameLogin }">
+											Đăng nhập
+										</c:if>
+									</a></li>
 								</ul>
 							</div>
 						</div>
@@ -124,10 +132,9 @@ form.example::after {
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="${pageContext.request.contextPath}/home" >Trang chủ</a></li>
-								<li><a href="${pageContext.request.contextPath}/product" >Sản phẩm</a> </li>  
-								<!-- <li><a href="#">Sales off</a></li> -->
-								<li><a href="${pageContext.request.contextPath}/contact">Liên hệ</a></li>
+								<li><a href="${pageContext.request.contextPath}/home?usernameLogin=${usernameLogin}" >Trang chủ</a></li>
+								<li><a href="${pageContext.request.contextPath}/product?usernameLogin=${usernameLogin}" >Sản phẩm</a> </li>  
+								<li><a href="${pageContext.request.contextPath}/contact?usernameLogin=${usernameLogin}">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>

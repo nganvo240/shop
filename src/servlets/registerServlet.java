@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.customer;
 import beans.user;
 import utils.DBuser;
 import utils.MyUtils;
@@ -50,6 +51,9 @@ public class registerServlet extends HttpServlet {
         String email = (String) request.getParameter("emailRegister");
         String roleStr = "1";//phân quyền người dùng =1
         int testRegister = 0;
+        String name="";
+        String address="";
+        String tel="";
         
         int role = 0;       
         try {
@@ -58,6 +62,7 @@ public class registerServlet extends HttpServlet {
         catch (Exception e) {
         }        
         user u = new user(usernameRegister, passRegister, email, role);
+        customer c = new customer(name, address, tel, usernameRegister);
         String errorStringRegister = null;        
         try {
             DBuser.insertUser(conn, u);
@@ -65,7 +70,13 @@ public class registerServlet extends HttpServlet {
             e.printStackTrace();
             errorStringRegister = e.getMessage();
         }
-               
+        try {
+			DBuser.insertCustomser(conn, c);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+        
         // Lưu thông tin vào request attribute trước khi forward sang views.
         request.setAttribute("errorStringRegister", errorStringRegister);
         request.setAttribute("user", u);
@@ -75,18 +86,17 @@ public class registerServlet extends HttpServlet {
         	testRegister = 1;
         	request.setAttribute("testRegister", testRegister);
         	System.out.println("thêm user thất bại");
-        	RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
-    		dispatcher.forward(request, response);
-        	
+      	
         }
         // Nếu mọi thứ tốt đẹp.
         else { 
         	testRegister = 2;
         	request.setAttribute("testRegister", testRegister);
         	System.out.println("thêm user thành công");
-        	RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
-    		dispatcher.forward(request, response);
+   
         }
+        RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

@@ -36,7 +36,8 @@ public class loginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String usernameLogin = (String)request.getParameter("usernameLogin");
+		request.setAttribute("usernameLogin", usernameLogin);
 		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -50,16 +51,16 @@ public class loginServlet extends HttpServlet {
       //Đăng nhập
         String usernameLogin = (String)request.getParameter("usernameLogin");
         String passwordLogin = (String) request.getParameter("passwordLogin");
+        
         String errorStringLogin = null;  
         int testLogin = 0;
         try {
         	testLogin = DBuser.testLogin(conn, usernameLogin, passwordLogin);
-        	System.out.println("test");
         } catch (SQLException e) {
             e.printStackTrace();
             errorStringLogin = e.getMessage();
         }
-               
+        System.out.println("login_teen dang nhap la:"+ usernameLogin);       
         // Lưu thông tin vào request attribute trước khi forward sang views.
         request.setAttribute("errorStringLogin", errorStringLogin);
         request.setAttribute("usernameLogin", usernameLogin);

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.customer;
 import beans.user;
 
 
@@ -16,7 +17,7 @@ public class DBuser {
         String sql = "INSERT INTO accuser(username, password, email, role) " + "VALUES(?,?,?,?)";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
-        System.out.println("add user");
+        System.out.println("thêm tài khoản");
         
         pstm.setString(1, u.getUsername());
         pstm.setString(2, u.getPassword());
@@ -37,4 +38,18 @@ public class DBuser {
 	    return rs.getInt(1);            
     } 
 	
+	public static customer insertCustomser(Connection conn, customer u) throws SQLException {
+        String sql = "INSERT INTO Customer(name, address, tel, username) " + "VALUES(?,?,?,?)";
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        
+        pstm.setString(1, u.getName());
+        pstm.setString(2, u.getAddress());
+        pstm.setString(3, u.getTel());
+        pstm.setString(4, u.getUsername());
+        
+        pstm.executeUpdate();
+        System.out.println("thêm khách hàng");
+        return u;             
+    }
 }

@@ -15,7 +15,6 @@
 	<link href="css/responsive.css" rel="stylesheet">	
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
 		<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
@@ -25,8 +24,9 @@
 						<form method="POST" action="${pageContext.request.contextPath}/login">
 							<input type="text" placeholder="Name" name="usernameLogin" />
 							<input type="password" placeholder="Password" name="passwordLogin"/>
-							<span><input type="checkbox" class="checkbox"> Keep me signed in</span>
-							<button type="submit" class="btn btn-default">Login</button>
+							<span><input type="checkbox" class="checkbox">Ghi nhớ</span>
+							<button type="submit" class="btn btn-default">Đăng nhập</button>
+							<c:set var="usernameLogin" value="${usernameLogin}" />
 								<c:if test="${testLogin =='1' }">
 									<script type="text/javascript">alert('Tên tài khoản hoặc mật khẩu không đúng');</script>
 								</c:if>			
@@ -35,7 +35,7 @@
 				</div>
 			<!-- </form> -->
 				<div class="col-sm-1">
-					<h2 class="or">OR</h2>
+					<h2 class="or">hoặc</h2>
 				</div>
 				<div class="col-sm-4">
 					<div class="signup-form"><!--sign up form-->
@@ -44,7 +44,7 @@
 							<input type="text" name="usernameRegister" placeholder="Name"/>
 							<input type="email" name="emailRegister" placeholder="Email Address"/>
 							<input type="password" name="passwordRegister" placeholder="Password"/>
-							<button type="submit" class="btn btn-default">Sign up</button>
+							<button type="submit" class="btn btn-default">Đăng ký</button>
 							<c:choose>
 								<c:when test="${testRegister =='2' }">
 									<script type="text/javascript">alert('Đăng ký thành công');</script>

@@ -25,7 +25,7 @@ import utils.MyUtils;
 /**
  * Servlet implementation class cartServlet
  */
-@WebServlet(name="bill", urlPatterns= {"/bill"})
+@WebServlet("/bill")
 public class billServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,68 +48,89 @@ public class billServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+
+	@SuppressWarnings("null")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
 
-        String idPro = (String)request.getParameter("action");
+        String idPro = (String)request.getParameter("id");
         String Strquantity = (String)request.getParameter("quantity"); 
-        
-        int customer = 0;
-        int totalMoney = 0;
-        int quantity = 1;
-        
-		  int idProduct = 0; try { idProduct = Integer.parseInt(idPro); }//đổi id từ string sang int }
-		  catch (Exception e) {}
-		  
-		  try { quantity = Integer.parseInt(Strquantity); }
-		  catch (Exception e) {}
-		  
-		 
-        bill b = new bill( customer, totalMoney );      
-        String errorString = null;
-        //thêm bill
-        try {
-            DBcart.insertBill(conn, b);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            errorString = e.getMessage();
+        String StrusernameLogin = (String)request.getParameter("usernameLogin");
+        String iAction = request.getParameter("action");
+        System.out.println("bill_tendnhap: "+StrusernameLogin);
+        if (iAction != null && !iAction.equals("")) {
+        	if (StrusernameLogin == null || StrusernameLogin.equals("")) {
+        		//cho phép mua hàng khi đã đăng nhập, nếu chưa thì chuyển đến trang đăng ký/đăng nhập
+        		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
+        		dispatcher.forward(request, response);
+        	}else {
+        		 	int customer = 0;
+			        int totalMoney = 0;
+			        int quantity = 1;
+			        
+			     try {
+			    	 customer = DBcart.IDcustomer(conn, StrusernameLogin);
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}			        
+			     System.out.println("bill_idcustomer: "+customer);
+			        
+					  int idProduct = 0; try { idProduct = Integer.parseInt(idPro); }//đổi id từ string sang int 
+					  catch (Exception e) {}
+					  
+					  try { quantity = Integer.parseInt(Strquantity); }
+					  catch (Exception e) {}
+					  
+					 
+			        bill b = new bill( customer, totalMoney );      
+			        String errorString = null;
+			        //thêm bill
+			        try {
+			            DBcart.insertBill(conn, b);
+			        } catch (SQLException e) {
+			            e.printStackTrace();
+			            errorString = e.getMessage();
+			        }
+			        
+			        int bill_id=0;
+					try {
+						bill_id = DBcart.maxID(conn,StrusernameLogin);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					System.out.println(bill_id+"********************");
+					System.out.println(idProduct+"********************");
+					System.out.println(quantity+"********************");
+			        bill_infor bf = new bill_infor( bill_id, idProduct, quantity );
+			      //thêm bill_infor
+			        try {
+						DBcart.insertBill_infor(conn, bf);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    			        
+			        // Lưu thông tin vào request attribute trước khi forward sang views.
+			        request.setAttribute("errorString", errorString);
+			 
+			        // Nếu có lỗi 
+			        if (errorString != null) {
+			        	System.out.println(" billthat bai");
+			        }
+			        // Nếu mọi thứ tốt đẹp.
+			        else {
+			        	System.out.println("billthành công");
+			        }
+			        //xử lý chuyển trang tùy vào nơi bấm thêm giỏ hàng(cần sửa)
+			        RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/home");
+					dispatcher.forward(request, response);
+        		}
         }
         
-        int bill_id=0;
-		try {
-			bill_id = DBcart.maxID(conn);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		System.out.println(bill_id+"********************");
-		System.out.println(idProduct+"********************");
-		System.out.println(quantity+"********************");
-        bill_infor bf = new bill_infor( bill_id, idProduct, quantity );
-      //thêm bill_infor
-        try {
-			DBcart.insertBill_infor(conn, bf);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    
-        
-        // Lưu thông tin vào request attribute trước khi forward sang views.
-        request.setAttribute("errorString", errorString);
-		/* request.setAttribute("sinhvien", b); */
- 
-        // Nếu có lỗi forward sang trang edit.
-        if (errorString != null) {
-        	System.out.println("that bai");
-        }
-        // Nếu mọi thứ tốt đẹp.
-        else {
-        	System.out.println("thành công");
-        }
-		 
 	}
 
 }

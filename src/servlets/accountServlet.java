@@ -32,7 +32,7 @@ public class accountServlet extends HttpServlet {
 		//sửa lỗi tiếng việt
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        
+
 		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/account.jsp");
 		dispatcher.include(request, response);
 	}

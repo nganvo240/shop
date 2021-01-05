@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +16,9 @@
 	<link href="css/responsive.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/header" />
 	<section id="cart_items">
 		<div class="container">
-			<!-- <div class="breadcrumbs">
-				<ol class="breadcrumb">
-				  <li><a href="#">Home</a></li>
-				  <li class="active">Shopping Cart</li>
-				</ol>
-			</div> -->
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -36,16 +32,18 @@
 						</tr>
 					</thead>
 					<tbody>
+					<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="get">
+					<c:forEach  items="${productsCart}" var="item">
 						<tr>
 							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
+								<a href=""><img src="${item.img}" alt="" style="max-height: 110px; max-width: 110px;"></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
+								<h4><a href="">${item.name}</a></h4>
+								<p>ID: ${item.id}</p>
 							</td>
 							<td class="cart_price">
-								<p>$59</p>
+								<p><fmt:formatNumber type="number" groupingUsed="true" value="${ item.price}"/> đ</p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
@@ -60,7 +58,9 @@
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
-						</tr>		
+						</tr>
+						</c:forEach>	
+						</form>	
 					</tbody>
 				</table>
 			</div>

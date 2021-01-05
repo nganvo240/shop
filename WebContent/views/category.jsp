@@ -63,7 +63,6 @@
 	}
 	else {
 		document.getElementById("r_all").checked = true;
-		document.getElementById("price_all").checked = true;
 	}
 	//giá
 	if (price == '1M'){
@@ -74,6 +73,9 @@
 	}
 	else if (price == '500K'){
 		document.getElementById("500K").checked = true;
+	}
+	else{
+		document.getElementById("price_all").checked = true;
 	}
 </script>	
 </body>

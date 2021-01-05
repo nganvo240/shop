@@ -45,8 +45,14 @@ public class DBproduct {
 	public static List<product> listProduct(Connection conn, String x)
 			throws SQLException, ClassNotFoundException
 	{
-		String sql = "select * from product " + CommandSQL_Price(x);
-		sql = sql.replace("{and}", "");
+		String sql = "select * from product where " + CommandSQL_Price(x);
+		int pos=28;
+		if (x.equals("all")) {			
+			sql = sql.replace("where", "");
+		}else { 
+			sql = sql.substring(0,pos) + sql.substring(pos+3); 
+		}
+
 		PreparedStatement pstm =conn.prepareStatement(sql);
 		
 		ResultSet rs = pstm.executeQuery();
@@ -110,7 +116,7 @@ public class DBproduct {
 			result="and price > 1000000";
 		}
 		else if (x.equals("500K-1M")) {
-			result="and price between 500000 and 1000000 ";
+			result="and price between 500000 and 1000000";
 		}
 		else if (x.equals("500K")) {
 			result="and price < 500000";

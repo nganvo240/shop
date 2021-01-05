@@ -23,7 +23,7 @@
 
 </head>
 <body>
-	<jsp:include page="/views/header.jsp"></jsp:include>
+	<jsp:include page="/header" /> 
 	 
 	 <div id="contact-page" class="container">
     	<div class="bg">	

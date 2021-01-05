@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<jsp:include page="/views/header.jsp"></jsp:include>	
+	<jsp:include page="/header" /> 	
 	<section>
 		<div class="container">
 			<div class="row">
