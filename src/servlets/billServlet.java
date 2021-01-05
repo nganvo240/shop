@@ -52,7 +52,7 @@ public class billServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
 
-        String idPro = (String)request.getAttribute("id");
+        String idPro = (String)request.getParameter("action");
         String Strquantity = (String)request.getParameter("quantity"); 
         
         int customer = 0;
