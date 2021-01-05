@@ -31,8 +31,8 @@ public class DBcart {
         PreparedStatement pstm = conn.prepareStatement(sql);
         
         pstm.setInt(1, sv.getBill_id());
-        pstm.setInt(1, sv.getProduct_id());
-        pstm.setInt(2, 1);
+        pstm.setInt(2, sv.getProduct_id());
+        pstm.setInt(3, sv.getQuantity());
         
         pstm.executeUpdate();
         System.out.println("theem bill_inf");

@@ -29,9 +29,10 @@
 								<img src="${product.img}" alt="" />
 							</div>
 						</div>
-			
+			<form method="POST" action="${pageContext.request.contextPath}/bill" >
 						<div class="col-sm-7">
-							<div class="product-information"><!--/product-information-->				
+							<div class="product-information"><!--/product-information-->
+								<h2>Mã: ${product.id}</h2>				
 								<h2>${product.name}</h2>
 								<span>
 									<span><fmt:formatNumber type="number" groupingUsed="true" value="${ product.price}"/>đ</span><br><br><br>
@@ -43,7 +44,7 @@
 										     <option value="${itemSize.size}" data-max="${itemSize.quantity}">${itemSize.size}</option>				   										     			
 										    </c:forEach>											    						 
 									   </select>
-										     Số lượng: <input type="number"  min="0" max="0" value="0"/>										   										   		
+										     Số lượng: <input type="number" name="quantity"  min="0" max="0" value="0"/>										   										   		
 								</label><br><br>
 								</span>								
 								<div class="header-middle"><!--header-middle-->										
@@ -54,23 +55,12 @@
 										<p><b>Tình trạng:</b> Hết hàng</p>
 									</c:if>	
 									<p><b>Loại:</b> ${product.type_name}</p><br>
-									<button type="button" class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>								
+									<button type="button" class="btn btn-fefault cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>								
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
+				</form>
 				
-					<%-- <div class="category-tab shop-details-tab"><!--category-tab-->
-						<div class="col-sm-12">
-							<ul class="nav nav-tabs">
-								<li><span data-toggle="tab">Chi tiết</span></li>
-							</ul>
-						</div>
-						<div class="tab-content">
-								<div class="col-sm-3">
-									<p>${product.detail}</p>	
-								</div>									
-						</div>
-					</div> --%>
 			</div>
 		</div>
 	</div>

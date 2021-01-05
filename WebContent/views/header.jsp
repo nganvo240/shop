@@ -100,7 +100,7 @@ form.example::after {
 							<div class="shop-menu clearfix pull-right">
 								<ul class="nav navbar-nav">								
 									<li><a href="${pageContext.request.contextPath}/account"><i class="fa fa-user"></i>Account: ${ usernameLogin}</a></li>																
-									<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart:1</a></li>
+									<li><a href="${pageContext.request.contextPath}/cart"><i class="fa fa-shopping-cart"></i> Cart:1</a></li>
 									<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> Login</a></li>
 								</ul>
 							</div>
