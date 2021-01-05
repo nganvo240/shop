@@ -1,9 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,21 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.product;
-import utils.DBproduct;
-import utils.MyUtils;
-
 /**
- * Servlet implementation class productServlet
+ * Servlet implementation class accountServlet
  */
-@WebServlet("/product")
-public class productServlet extends HttpServlet {
+@WebServlet("/account")
+public class accountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public productServlet() {
+    public accountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,29 +29,12 @@ public class productServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = MyUtils.getStoredConnection(request) ;
-		String errorString = null;
-		List<product> list = null;
-		try {
-			list = DBproduct.listProduct(conn, "all");
-		} catch (SQLException e)
-		{
-			e.printStackTrace();
-			errorString = e.getMessage();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 		//sửa lỗi tiếng việt
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
         
-		int countProduct= list.size();
-		request.setAttribute("countProd", countProduct);
-		request.setAttribute("ProductListServlet", list);
-		
-		  RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/views/product.jsp");
-		  dispatcher.forward(request, response);
+		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/account.jsp");
+		dispatcher.include(request, response);
 	}
 
 	/**

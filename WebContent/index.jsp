@@ -45,7 +45,8 @@
 				<!-- nội dung hiển thị sản phẩm -->
 				<div class="col-sm-9 padding-left">	<!-- col-sm-9 padding-left :tạm thời-->			
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Sản phẩm nổi bật</h2>									
+						<h2 class="title text-center">Sản phẩm nổi bật</h2>	
+						<form method="POST" action="${pageContext.request.contextPath}/cart" >								
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
 							<div class="col-sm-4">
 							<div class="product-image-wrapper">
@@ -60,18 +61,22 @@
 											<div class="overlay-content">
 												<p>${ item.name}</p>
 												<a href="product_detail?id=${item.id}" class="btn btn-default add-to-cart">Xem</a>
+												
 											</div>
 										</div>
 								</div>
 								<div class="choose">
+								
 									<ul class="nav nav-pills nav-justified">
-										<li id="moo" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</li>
+										<!-- <li class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</li> -->
+										<li > <a href="cart?id=${item.id}">Thêm vào giỏ hàng</a></li>
 									</ul>		
 																														
 								</div>							
 								</div>
 							</div>																															    
 						</c:forEach>
+						</form>
 				</div>
 				</div>
 					
@@ -89,9 +94,6 @@
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
-<script>
-setTimeout( function ( ) { alert( "moo" ); }, 10 );
-</script>    
 
 </body>
 </html>
