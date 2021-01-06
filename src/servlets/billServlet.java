@@ -117,6 +117,7 @@ public class billServlet extends HttpServlet {
 					System.out.println(quantity+"********************");
 			        bill_infor bf = new bill_infor( bill_id, idProduct, quantity );
 			      //**********thêm bill_infor**********
+			        
 			        try {
 						DBcart.insertBill_infor(conn, bf);
 					} catch (SQLException e) {

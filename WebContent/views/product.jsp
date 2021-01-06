@@ -62,11 +62,11 @@
 											</div>
 										</div>
 								</div>
-								<div class="choose">
+								<!-- <div class="choose">
 									<ul class="nav nav-pills nav-justified">
 										<li><a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a></li>
 									</ul>																												
-								</div>
+								</div> -->
 								</div>
 							</div>
 							</div>																								    

@@ -21,7 +21,7 @@ public class DBcart {
         PreparedStatement pstm = conn.prepareStatement(sql);
         
         //pstm.setInt(1,sv.getId());// Integer.valueOf(sv.getId())
-        pstm.setInt(1, sv.getCustomer());
+        pstm.setInt(1, sv.getCustomer_id());
         pstm.setInt(2, sv.getTotalMoney());
         
         pstm.executeUpdate();
@@ -122,7 +122,7 @@ public class DBcart {
         String sql = "select sum(price*quantity) as sum\r\n"
         		+ "from bill_infor bf, product p, bill b, customer c, Accuser a\r\n"
         		+ "where bf.product_id=p.id and bf.bill_id=b.id and c.id=b.customer_id and c.username=a.username\r\n"
-        		+ "	and a.username='"+username+"'" ;
+        		+ "	and a.username='"+username+"' and b.status=0" ;
         Statement stmt = conn.createStatement();    
         ResultSet rs = stmt.executeQuery(sql);
         
@@ -143,4 +143,8 @@ public class DBcart {
         System.out.println(sql);
         
     }
+
+	/*
+	 * public static void main(String[] args) { TotalMoney }
+	 */
 }

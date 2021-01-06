@@ -17,7 +17,7 @@ public class DBuser {
         String sql = "INSERT INTO accuser(username, password, email, role) " + "VALUES(?,?,?,?)";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
-        System.out.println("thêm tài khoản");
+        System.out.println("thÃªm tÃ i khoáº£n");
         
         pstm.setString(1, u.getUsername());
         pstm.setString(2, u.getPassword());
@@ -33,7 +33,7 @@ public class DBuser {
         PreparedStatement pstm =conn.prepareStatement(sql);		
 		ResultSet rs = pstm.executeQuery();
 		rs.next();
-	     // Giá trị của ID (Vị trí 1 theo thiết kế của bảng)
+	     // GiÃ¡ trá»‹ cá»§a ID (Vá»‹ trÃ­ 1 theo thiáº¿t káº¿ cá»§a báº£ng)
 		System.out.println(rs.getInt(1));
 	    return rs.getInt(1);            
     } 
@@ -49,7 +49,16 @@ public class DBuser {
         pstm.setString(4, u.getUsername());
         
         pstm.executeUpdate();
-        System.out.println("thêm khách hàng");
+        System.out.println("thÃªm khÃ¡ch hÃ ng");
         return u;             
     }
+	public static int testLoginAdmin(Connection conn, String usernameAD, String password) throws SQLException {
+        String sql = "select COUNT(*) from Admin where usernameAD= '" + usernameAD + "'" + " and password= '"+ password + "'";
+        PreparedStatement pstm =conn.prepareStatement(sql);		
+		ResultSet rs = pstm.executeQuery();
+		rs.next();
+	     // Giá trị của ID (Vị trí 1 theo thiết kế của bảng)
+		System.out.println(rs.getInt(1));
+	    return rs.getInt(1);            
+    } 
 }

@@ -1,13 +1,25 @@
 package beans;
 
 public class bill_infor {
-	private int bill_id, product_id, quantity;
+	private int bill_id, product_id, quantity,id;
+	public bill_infor()
+	{
+		
+	}
 	public bill_infor(int bill_id, int product_id, int quantity )
 	{
 		super();
 		this.setBill_id(bill_id);
 		this.setProduct_id(product_id);
 		this.setQuantity(quantity);
+	}
+	public bill_infor(int bill_id, int product_id, int quantity , int id )
+	{
+		super();
+		this.setBill_id(bill_id);
+		this.setProduct_id(product_id);
+		this.setQuantity(quantity);
+		this.setId(id);
 	}
 	public int getBill_id() {
 		return bill_id;
@@ -31,6 +43,12 @@ public class bill_infor {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

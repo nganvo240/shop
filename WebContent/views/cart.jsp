@@ -16,7 +16,7 @@
 	<link href="css/responsive.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/header" />
+	<jsp:include page="/header.jsp" />
 	<section id="cart_items">
 		<div class="container">
 			<div class="table-responsive cart_info">
@@ -47,16 +47,14 @@
 								</td>
 								<td class="cart_quantity">
 									<div class="cart_quantity_button">
-										<a class="cart_quantity_up" href=""> + </a>
-										<input class="cart_quantity_input" type="text" name="quantity" value="${ item.quantity}" autocomplete="off" size="2">
-										<a class="cart_quantity_down" href=""> - </a>
+										<input id="quantity" type="number" name="quantity" value="${ item.quantity}" autocomplete="off" size="2">
 									</div>
 								</td>
 								<td class="cart_total">
 									<p class="cart_total_price"><fmt:formatNumber type="number" groupingUsed="true" value="${item.totalPrice}"/> đ</p>
 								</td>	
 									<td class="cart_delete">
-										<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="POST" hsjds>												
+										<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="POST">												
 										<!-- <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a> -->
 										<input type='hidden' name='stt' value='<c:out value="${counter.count}"/>'><%-- ${counter.count} --%>
 										<input type="submit" name="action" value="X">
@@ -77,7 +75,7 @@
 							<li>Tổng: <span><fmt:formatNumber type="number" groupingUsed="true" value="${totalMoney}"/> đ</span></li>
 						</ul>
 						<input type='hidden' name='totalMoney' value='<c:out value="${totalMoney}"/>'>
-					</form>
+					
 					</div>
 					</div>
 		</div>
@@ -92,11 +90,9 @@
 			</div>
 			<div class="row">				
 				<div class="col-sm-6">					
-					<!-- <a class="btn btn-default check_out" >Thanh toán</a> -->
-					<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="POST"  >
-						<input type="submit" name="action" value="Mua">
+						<input type="submit" name="action" value="Thanh toán">
 						<c:if test="${testBuy =='1' }">
-							<script type="text/javascript">alert('Mua thành công');</script>
+							<script type="text/javascript">alert('Thanh toán thành công');</script>
 						</c:if>
 					</form>
 				</div>
@@ -105,4 +101,6 @@
 	</section><!--/#do_action-->
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
+
+
 </html>

@@ -72,7 +72,7 @@ form.example::after {
 							<ul class="nav nav-pills">
 								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i> info@gmail.com</a></li>
-								<li><a href="${pageContext.request.contextPath}/adminServlet"> Admin</a></li>
+								<li><a href="${pageContext.request.contextPath}/Adlogin"><i class="fa fa-lock"></i>Admin</a></li>
 							</ul>
 						</div>
 					</div>
@@ -93,7 +93,7 @@ form.example::after {
 				<div class="row">
 					<div class="col-md-4 clearfix">
 						<div class="logo pull-left">
-							<a href="${pageContext.request.contextPath}/home"><img src="images/home/logo.png" alt="" /></a>
+							<a href="${pageContext.request.contextPath}/home"><img src="images/home/logo1.jpg" alt="" /></a>
 						</div>					
 					</div>
 					<form method="GET" action="header">
@@ -103,6 +103,7 @@ form.example::after {
 									<li><a href="${pageContext.request.contextPath}/account"><i class="fa fa-user"></i>Tài khoản: ${usernameLogin}</a></li>																
 									<li><a href="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}"><i class="fa fa-shopping-cart"></i> Giỏ hàng:1</a></li>
 									<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> 
+									
 										<c:if test="${not empty usernameLogin }">
 											Đăng xuất
 										</c:if>

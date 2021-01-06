@@ -77,7 +77,7 @@ public class cartServlet extends HttpServlet {
 		String StrIDpro = (String)request.getParameter("stt");
         String iAction = (String)request.getParameter("action");
         String StrtotalMoney = (String)request.getParameter("totalMoney");
-        System.out.println("cart_StrtotalMoney:"+StrtotalMoney);
+        System.out.println("cart_StrtotalMoney2:"+StrtotalMoney);
         int totalMoney=0;
         try {
         	totalMoney = Integer.parseInt(StrtotalMoney);
@@ -89,8 +89,7 @@ public class cartServlet extends HttpServlet {
             	System.out.println("cart_Xóa:"+StrIDpro);
             	
             }
-            else if (iAction.equals("Mua")) {
-            	
+            else if (iAction.equals("Thanh toÃ¡n")) {
             	try {
 					DBcart.updateBill(conn, totalMoney, usernameLogin);
 					System.out.println(totalMoney+"******");
