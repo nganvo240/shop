@@ -65,7 +65,6 @@
 								<div class="choose">
 								<form method="POST" action="${pageContext.request.contextPath}/bill?id=${item.id}&usernameLogin=${usernameLogin}" >						
 									<ul class="nav nav-pills nav-justified">
-										<!-- <li class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</li> -->
 										<li class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><input type="submit" name="action" value="Thêm vào giỏ hàng"></li>
 									</ul>																
 								</div>							

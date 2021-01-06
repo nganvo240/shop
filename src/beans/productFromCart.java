@@ -1,7 +1,7 @@
 package beans;
 
 public class productFromCart {
-	private int id, quantity, price;
+	private int id, quantity, price, totalPrice;
 	private String img, name ;
 	
 	
@@ -34,5 +34,11 @@ public class productFromCart {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

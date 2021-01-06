@@ -52,8 +52,16 @@ public class cartServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
+		int totalMoney=0;
+		try {
+			totalMoney = DBcart.TotalMoney(conn, usernameLogin);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		request.setAttribute("productsCart", list);
+		request.setAttribute("totalMoney", totalMoney);
 		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/cart.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -61,9 +69,45 @@ public class cartServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		Connection conn = MyUtils.getStoredConnection(request) ;
+		String usernameLogin = (String)request.getParameter("usernameLogin");
+		String StrIDpro = (String)request.getParameter("stt");
+        String iAction = (String)request.getParameter("action");
+        String StrtotalMoney = (String)request.getParameter("totalMoney");
+        System.out.println("cart_StrtotalMoney:"+StrtotalMoney);
+        int totalMoney=0;
+        try {
+        	totalMoney = Integer.parseInt(StrtotalMoney);
+        } catch (Exception e) { }
+              
+        System.out.println("cart_iAction:"+iAction);
+        if (iAction != null && !iAction.equals("")) {
+            if (iAction.equals("X")) {
+            	System.out.println("cart_Xóa:"+StrIDpro);
+            	
+            }
+            else if (iAction.equals("Mua")) {
+            	
+            	try {
+					DBcart.updateBill(conn, totalMoney, usernameLogin);
+					System.out.println(totalMoney+"******");
+					System.out.println(usernameLogin+"******");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	request.setAttribute("testBuy", 1);
+            	RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/cart.jsp");
+        		dispatcher.forward(request, response);
+            }
+            
+        }
+        request.setAttribute("usernameLogin", usernameLogin);
+		/* response.sendRedirect(request.getContextPath() + "/cart"); */
+        
 	}
 
 }

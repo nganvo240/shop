@@ -53,18 +53,19 @@ public class billServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
-
+		String errorString = null;
         String idPro = (String)request.getParameter("id");
         String Strquantity = (String)request.getParameter("quantity"); 
         String StrusernameLogin = (String)request.getParameter("usernameLogin");
         String iAction = request.getParameter("action");
         System.out.println("bill_tendnhap: "+StrusernameLogin);
-        if (iAction != null && !iAction.equals("")) {
+        
+        if (iAction != null && !iAction.equals("")) {//khi nhấn submit
         	if (StrusernameLogin == null || StrusernameLogin.equals("")) {
         		//cho phép mua hàng khi đã đăng nhập, nếu chưa thì chuyển đến trang đăng ký/đăng nhập
         		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
         		dispatcher.forward(request, response);
-        	}else {
+        	}else {//xử lý bill+bill_inf
         		 	int customer = 0;
 			        int totalMoney = 0;
 			        int quantity = 1;
@@ -82,17 +83,26 @@ public class billServlet extends HttpServlet {
 					  
 					  try { quantity = Integer.parseInt(Strquantity); }
 					  catch (Exception e) {}
-					  
-					 
-			        bill b = new bill( customer, totalMoney );      
-			        String errorString = null;
-			        //thêm bill
-			        try {
-			            DBcart.insertBill(conn, b);
-			        } catch (SQLException e) {
-			            e.printStackTrace();
-			            errorString = e.getMessage();
-			        }
+					 //kiểm tra tài khoản đã có giỏ hàng sẵn chưa 
+					 int temp = 0;
+					 try {
+						temp = DBcart.IDBIll_AlreadyExist(conn, StrusernameLogin);
+					} catch (SQLException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					 System.out.println("bill_idbill: "+temp);
+					if (temp==0) {//nếu chưa có giỏ thì insert
+						bill b = new bill( customer, totalMoney );      
+				        
+				        //*******thêm bill**********
+				        try {
+				            DBcart.insertBill(conn, b);
+				        } catch (SQLException e) {
+				            e.printStackTrace();
+				            errorString = e.getMessage();
+				        }
+					}		        
 			        
 			        int bill_id=0;
 					try {
@@ -106,12 +116,13 @@ public class billServlet extends HttpServlet {
 					System.out.println(idProduct+"********************");
 					System.out.println(quantity+"********************");
 			        bill_infor bf = new bill_infor( bill_id, idProduct, quantity );
-			      //thêm bill_infor
+			      //**********thêm bill_infor**********
 			        try {
 						DBcart.insertBill_infor(conn, bf);
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						errorString = e.getMessage();
 					}
 			    			        
 			        // Lưu thông tin vào request attribute trước khi forward sang views.
@@ -125,6 +136,7 @@ public class billServlet extends HttpServlet {
 			        else {
 			        	System.out.println("billthành công");
 			        }
+			        //số lượng sản phẩm trong giỏ hàng
 			        //xử lý chuyển trang tùy vào nơi bấm thêm giỏ hàng(cần sửa)
 			        RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/home");
 					dispatcher.forward(request, response);
