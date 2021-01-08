@@ -100,7 +100,7 @@ form.example::after {
 						<div class="col-md-8 clearfix">
 							<div class="shop-menu clearfix pull-right">
 								<ul class="nav navbar-nav">								
-									<li><a href="${pageContext.request.contextPath}/account"><i class="fa fa-user"></i>Tài khoản: ${usernameLogin}</a></li>																
+									<li><a href="${pageContext.request.contextPath}/account?usernameLogin=${usernameLogin}"><i class="fa fa-user"></i>Tài khoản: ${usernameLogin}</a></li>																
 									<li><a href="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}"><i class="fa fa-shopping-cart"></i> Giỏ hàng:1</a></li>
 									<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> 
 									

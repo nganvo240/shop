@@ -23,7 +23,7 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head>
 <body>
-	<jsp:include page="/views/header.jsp"></jsp:include>
+	<jsp:include page="/header" /> 	
 
 	<section id="cart_items">
 		<div class="container">				
