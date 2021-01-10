@@ -58,16 +58,16 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<p>${ item.name}</p>
-												<a href="product_detail?id=${item.id}" class="btn btn-default add-to-cart">Xem</a>																							
+												<a href="product_detail?id=${item.id}&usernameLogin=${usernameLogin}" class="btn btn-default add-to-cart">Xem</a>																							
 											</div>
 										</div>
 								</div>
-								<div class="choose">
+								<%-- <div class="choose">
 								<form method="POST" action="${pageContext.request.contextPath}/bill?id=${item.id}&usernameLogin=${usernameLogin}" >						
 									<ul class="nav nav-pills nav-justified">
 										<li class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i><input type="submit" name="action" value="Thêm vào giỏ hàng"></li>
 									</ul>																
-								</div>							
+								</div>	 --%>						
 								</div>
 							</div>																															    
 						</c:forEach>

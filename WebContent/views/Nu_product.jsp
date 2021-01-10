@@ -89,7 +89,7 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<p>${ item.name}</p>										
-												<a href="product_detail?id=${item.id}" class="btn btn-default add-to-cart">Xem</a>											
+												<a href="product_detail?id=${item.id}&usernameLogin=${usernameLogin}" class="btn btn-default add-to-cart">Xem</a>											
 											</div>
 										</div>
 								</div>

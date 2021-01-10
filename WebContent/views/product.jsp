@@ -35,13 +35,11 @@
 </head>
 
 <body>
-	<jsp:include page="/header" /> 	
-	<section>
+	<jsp:include page="/header" /> 		
 		<div class="container">
 			<div class="row">
 				<jsp:include page="/categoryServlet" />
-
-	<div class="col-sm-9 padding-right">
+				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Sản phẩm</h2>																		
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
@@ -58,7 +56,7 @@
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<p>${ item.name}</p>										
-												<a href="product_detail?id=${item.id}" class="btn btn-default add-to-cart">Xem</a>											
+												<a href="product_detail?id=${item.id}&usernameLogin=${usernameLogin}" class="btn btn-default add-to-cart">Xem</a>											
 											</div>
 										</div>
 								</div>

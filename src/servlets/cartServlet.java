@@ -18,9 +18,10 @@ import utils.MyUtils;
 
 /**
  * Servlet implementation class cartServlet
+ * @param <cart>
  */
-@WebServlet("/cart")
-public class cartServlet extends HttpServlet {
+@WebServlet(name="cart", urlPatterns= {"/cart"})
+public class cartServlet<cart> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -74,20 +75,56 @@ public class cartServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
 		String usernameLogin = (String)request.getParameter("usernameLogin");
-		String StrIDpro = (String)request.getParameter("stt");
+		String StrNumRow = (String)request.getParameter("stt");
         String iAction = (String)request.getParameter("action");
         String StrtotalMoney = (String)request.getParameter("totalMoney");
-        System.out.println("cart_StrtotalMoney2:"+StrtotalMoney);
+        String Strquantity = (String)request.getParameter("quantity");
+        
         int totalMoney=0;
-        try {
-        	totalMoney = Integer.parseInt(StrtotalMoney);
+        int NumRow=0;
+        int bill_id=0;
+        int quantity=0;
+        
+        try { quantity = Integer.parseInt(Strquantity);
         } catch (Exception e) { }
-              
-        System.out.println("cart_iAction:"+iAction);
+        
+        try { totalMoney = Integer.parseInt(StrtotalMoney);
+        } catch (Exception e) { }
+        
+        try { NumRow = Integer.parseInt(StrNumRow);
+        } catch (Exception e) { }
+        
+        try {
+			bill_id = DBcart.getBillID_ByUrname(conn, usernameLogin);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println("cart_StrNumRow:"+NumRow);
         if (iAction != null && !iAction.equals("")) {
-            if (iAction.equals("X")) {
-            	System.out.println("cart_Xóa:"+StrIDpro);
+            if (iAction.equals("XÃ³a")) {
+            	            	           	
+            	try {
+					DBcart.delProFromCart(conn, bill_id, NumRow);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             	
+				 response.sendRedirect("cart?usernameLogin="+usernameLogin); 
+            	            	
+            }
+            else if (iAction.equals("Cáº­p nháº­t")) {
+            	try {
+					DBcart.updateProInCart(conn, quantity, bill_id, NumRow);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	System.out.println("cart_StrNumRow:"+NumRow);
+                System.out.println("cart_quantity:"+quantity);      
+                System.out.println("cart_iAction:"+iAction);
+                response.sendRedirect("cart?usernameLogin="+usernameLogin); 
             }
             else if (iAction.equals("Thanh toÃ¡n")) {
             	try {
@@ -104,6 +141,7 @@ public class cartServlet extends HttpServlet {
             }
             
         }
+        
         request.setAttribute("usernameLogin", usernameLogin);
 		/* response.sendRedirect(request.getContextPath() + "/cart"); */
         

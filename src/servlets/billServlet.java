@@ -3,7 +3,6 @@ package servlets;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,26 +48,29 @@ public class billServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 
-	@SuppressWarnings("null")
+	/* @SuppressWarnings("null") */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request);
 		String errorString = null;
         String idPro = (String)request.getParameter("id");
         String Strquantity = (String)request.getParameter("quantity"); 
+        String Strsize = (String)request.getParameter("options"); 
         String StrusernameLogin = (String)request.getParameter("usernameLogin");
         String iAction = request.getParameter("action");
         System.out.println("bill_tendnhap: "+StrusernameLogin);
         
-        if (iAction != null && !iAction.equals("")) {//khi nhấn submit
+        if (iAction != null && !iAction.equals("")) {//khi nhấn submit thêm giỏ hàng
         	if (StrusernameLogin == null || StrusernameLogin.equals("")) {
         		//cho phép mua hàng khi đã đăng nhập, nếu chưa thì chuyển đến trang đăng ký/đăng nhập
         		RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/views/login.jsp");
         		dispatcher.forward(request, response);
         	}else {//xử lý bill+bill_inf
+        			int idProduct = 0;
         		 	int customer = 0;
 			        int totalMoney = 0;
-			        int quantity = 1;
+			        int quantity = 0;
+			        int size = 0;
 			        
 			     try {
 			    	 customer = DBcart.IDcustomer(conn, StrusernameLogin);
@@ -78,11 +80,16 @@ public class billServlet extends HttpServlet {
 				}			        
 			     System.out.println("bill_idcustomer: "+customer);
 			        
-					  int idProduct = 0; try { idProduct = Integer.parseInt(idPro); }//đổi id từ string sang int 
+					  try { idProduct = Integer.parseInt(idPro); }//đổi id từ string sang int 
 					  catch (Exception e) {}
 					  
 					  try { quantity = Integer.parseInt(Strquantity); }
 					  catch (Exception e) {}
+					  
+					  try { size = Integer.parseInt(Strsize); }
+					  catch (Exception e) {}
+					  
+					  
 					 //kiểm tra tài khoản đã có giỏ hàng sẵn chưa 
 					 int temp = 0;
 					 try {
@@ -112,10 +119,11 @@ public class billServlet extends HttpServlet {
 						e1.printStackTrace();
 					}
 					
-					System.out.println(bill_id+"********************");
-					System.out.println(idProduct+"********************");
-					System.out.println(quantity+"********************");
-			        bill_infor bf = new bill_infor( bill_id, idProduct, quantity );
+					System.out.println("bill_id:"+bill_id);
+					System.out.println("idProduct:"+idProduct);
+					System.out.println("quantity:"+quantity+"********************");
+					System.out.println("size:"+size+"********************");
+			        bill_infor bf = new bill_infor( bill_id, idProduct, quantity, size );
 			      //**********thêm bill_infor**********
 			        
 			        try {
@@ -128,18 +136,10 @@ public class billServlet extends HttpServlet {
 			    			        
 			        // Lưu thông tin vào request attribute trước khi forward sang views.
 			        request.setAttribute("errorString", errorString);
-			 
-			        // Nếu có lỗi 
-			        if (errorString != null) {
-			        	System.out.println(" billthat bai");
-			        }
-			        // Nếu mọi thứ tốt đẹp.
-			        else {
-			        	System.out.println("billthành công");
-			        }
+			 			        
 			        //số lượng sản phẩm trong giỏ hàng
-			        //xử lý chuyển trang tùy vào nơi bấm thêm giỏ hàng(cần sửa)
-			        RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/home");
+			        //xử lý chuyển trang tùy vào nơi bấm thêm giỏ hàng(cần sửa lại: giữ nguyên trang),
+			        RequestDispatcher dispatcher  = this.getServletContext().getRequestDispatcher("/product");
 					dispatcher.forward(request, response);
         		}
         }

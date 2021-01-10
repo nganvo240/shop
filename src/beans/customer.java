@@ -2,11 +2,13 @@ package beans;
 
 public class customer {
 	private String name, address, tel, username ;
-	
+	public customer() {
+		
+	}
 	public customer( String name, String address, String tel, String username )
 	{
 		super();
-		this.setName(username);
+		this.setName(name);
 		this.setAddress(address);
 		this.setTel(tel);
 		this.setUsername(username);

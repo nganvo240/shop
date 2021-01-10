@@ -33,15 +33,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="get">
+					
 						<c:forEach  items="${productsCart}" var="item" varStatus="counter">
+							<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}&stt=${counter.count}" method="POST" >	
 							<tr>
 								<td class="cart_product">
 									<a href=""><img src="${item.img}" alt="" style="max-height: 110px; max-width: 110px;"></a>
 								</td>
 								<td class="cart_description">
 									<h4><a href="">${item.name}</a></h4>
-									<p>ID: ${item.id}</p>
+									<p>ID: ${item.id}, Size: ${item.size_product}</p>
 								</td>
 								<td class="cart_price">
 									<p><fmt:formatNumber type="number" groupingUsed="true" value="${ item.price}"/> đ</p>
@@ -49,36 +50,36 @@
 								<td class="cart_quantity">
 									<div class="cart_quantity_button">
 										<%-- <input id="quantity" type="number" name="quantity" value="${ item.quantity}" autocomplete="off" size="2"> --%>
-										<button onclick="buttonClick()">Click Me</button>
-										<input type="text" id="inc" value="0"></input>
+										<input style="width:50px" type="number" name="quantity"  min="1" max="100" value="${ item.quantity}"/>
 									</div>
 								</td>
 								<td class="cart_total">
 									<p class="cart_total_price"><fmt:formatNumber type="number" groupingUsed="true" value="${item.totalPrice}"/> đ</p>
 								</td>	
 									<td class="cart_delete">
-										<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="POST" hsjds>												
-										<!-- <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a> -->
-										<input type='hidden' name='stt' value='<c:out value="${counter.count}"/>'><%-- ${counter.count} --%>
-										<input type="submit" name="action" value="X">
-										</form>				
+										<%-- <form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="POST" >	 --%>											
+										<!-- <!-- <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a> --> 
+										<input type='hidden' name='stt' value='<c:out value="${counter.count}"/>'>
+										<input style="background:#32CD32;border-style: hidden; width:90px; height:30px; " type="submit" name="action" value="Cập nhật"> 
+										<input style="background:#FF6347;border-style: hidden; width:50px; height:30px; " type="submit" name="action" value="Xóa">
+										<!-- </form>	 -->			
 									</td>
 								
 							</tr>
-							
+								</form>	
 							</c:forEach>	
-						</form>	
+						
 					</tbody>
 				</table>
 			</div>
 			<div class="col-sm-6">
 					<div class="total_area">
-					<form method="POST" action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}&totalMoney=${totalMoney}"   >
+					
 						<ul>
-							<li>Tổng: <span><fmt:formatNumber type="number" groupingUsed="true" value="${totalMoney}"/> đ</span></li>
+							<li>Tổng thanh toán: <span><fmt:formatNumber type="number" groupingUsed="true" value="${totalMoney}"/> đ</span></li>
 						</ul>
 						<input type='hidden' name='totalMoney' value='<c:out value="${totalMoney}"/>'>
-					</form>
+					<!-- </form> -->
 					</div>
 					</div>
 		</div>
@@ -93,9 +94,9 @@
 			</div>
 			<div class="row">				
 				<div class="col-sm-6">					
-					<!-- <a class="btn btn-default check_out" >Thanh toán</a> -->
-					<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}" method="POST"  >
-						<input type="submit" name="action" value="Mua">
+					
+					<form action="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}&totalMoney=${totalMoney}" method="POST"  >
+						<input style="background:#33ff66; border-style: hidden; width:150px; height:60px;" type="submit" name="action" value="Thanh toán">
 						<c:if test="${testBuy =='1' }">
 							<script type="text/javascript">alert('Mua thành công');</script>
 						</c:if>

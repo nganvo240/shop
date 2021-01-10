@@ -6,13 +6,14 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/price-range.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 <!-- xử lý thanh cuộn chuyển qua lại các tin (jquery) -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -60,6 +61,21 @@ form.example::after {
   clear: both;
   display: table;
 }
+/* số lượng sản phẩm trong giỏ hàng */
+.badge:after{
+	content:attr(value);
+	background-size: 75% 50%;
+	font-size:13px;
+	background: yellow;
+	color: black;
+	border-radius:50%;
+	padding:3px;
+	position:relative;
+	left:-8px;
+	top:-10px;
+	opacity:0.9;
+
+}
 </style>
 </head>
 <body>
@@ -93,15 +109,15 @@ form.example::after {
 				<div class="row">
 					<div class="col-md-4 clearfix">
 						<div class="logo pull-left">
-							<a href="${pageContext.request.contextPath}/home"><img src="images/home/logo1.jpg" alt="" /></a>
+							<a href="${pageContext.request.contextPath}/home?usernameLogin=${usernameLogin}"><img src="images/home/logo1.jpg" alt="" /></a>
 						</div>					
 					</div>
 					<form method="GET" action="header">
 						<div class="col-md-8 clearfix">
 							<div class="shop-menu clearfix pull-right">
 								<ul class="nav navbar-nav">								
-									<li><a href="${pageContext.request.contextPath}/account?usernameLogin=${usernameLogin}"><i class="fa fa-user"></i>Tài khoản: ${usernameLogin}</a></li>																
-									<li><a href="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}"><i class="fa fa-shopping-cart"></i> Giỏ hàng:1</a></li>
+									<li><a href="${pageContext.request.contextPath}/account?usernameLogin=${usernameLogin}"><i class="fa fa-user" style="color:#FE980F;"></i> <span >${usernameLogin}</span></a></li>																
+									<li><a href="${pageContext.request.contextPath}/cart?usernameLogin=${usernameLogin}"><i class="fa badge"  value="${numProduct}" style="font-size:19px; color:#FE980F; background:white;padding:0px;">  &#xf07a;</i></a></li>
 									<li><a href="${pageContext.request.contextPath}/login"><i class="fa fa-lock"></i> 
 									
 										<c:if test="${not empty usernameLogin }">
