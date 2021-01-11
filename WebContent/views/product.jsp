@@ -26,22 +26,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
    
 <style>
-	#pagination {
+#pagination {
 	  	display: flex;
-    	justify-content: center;
-   		
+    	justify-content: center;   		
 	}
 </style>
 </head>
-
 <body>
-	<jsp:include page="/header" /> 		
-		<div class="container">
+	<jsp:include page="/header" /> 			
+	<section>		
+		<div class="container">		
 			<div class="row">
-				<jsp:include page="/categoryServlet" />
+				<jsp:include page="/categoryServlet?usernameLogin=${usernameLogin }" />
 				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Sản phẩm</h2>																		
+					<div class="features_items">
+						<h2 class="title text-center">------------------Tất cả------------------</h2>																		
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
 						<div class="contentPage">
 							<div class="col-sm-4">

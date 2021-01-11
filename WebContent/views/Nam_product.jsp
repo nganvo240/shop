@@ -66,15 +66,15 @@
 </head>
 
 <body>
-	<jsp:include page="/views/header.jsp"></jsp:include>	
+	<jsp:include page="/header" /> 		
 	<section>
 		<div class="container">
 			<div class="row">
 				<jsp:include page="/categoryServlet?btnType=rNam" />
 
 	<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Giày nam</h2>																		
+					<div class="features_items">
+						<h2 class="title text-center">------------------Giày nam------------------</h2>																		
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
 						<div class="contentPage">
 							<div class="col-sm-4">

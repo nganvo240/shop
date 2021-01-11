@@ -64,19 +64,22 @@
 	}
 </style>
 </head>
-
 <body>
-	<jsp:include page="/views/header.jsp"></jsp:include>	
+
+	<jsp:include page="/header" /> 		
 	<section>
 		<div class="container">
 			<div class="row">
-				<jsp:include page="/categoryServlet?btnType=rNu&price=${price}" />
-	<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-					
-						<h2 class="title text-center">Giày nữ</h2>																		
+				<jsp:include page="/categoryServlet?btnType=rNu&price=${price}" />				
+				<div class="col-sm-9 padding-right">				
+					<div class="features_items">										
+						<h2 class="title text-center">------------------Giày nữ------------------</h2>		
+						<c:if test="${empty  ProductListServlet}">
+							<span style='font-size:30px;display: flex;justify-content: center;'>Rất tiếc sản phẩm bạn tìm không tồn  tại &#128531;</span>
+						</c:if>																
 						<c:forEach  items="${ProductListServlet}" var="item" varStatus="loop">
 						<div class="contentPage">
+						
 							<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">

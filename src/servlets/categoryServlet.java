@@ -36,24 +36,28 @@ public class categoryServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
+		String StrusernameLogin = (String)request.getParameter("usernameLogin");
 		String btnType = (String) request.getParameter("btnType");
 		String btnRadioPrice = (String) request.getParameter("btnRadioPrice");
+		System.out.println("cate:"+StrusernameLogin);
 		String errorString = null;
 		List<type> listType = null;
 		try {
 			listType = DBcategory.listType(conn);	
 		} catch (SQLException e)
 		{
+			
 			e.printStackTrace();
 			errorString = e.getMessage();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-
+		request.setAttribute("usernameLogin", StrusernameLogin);
 		request.setAttribute("TypetListServlet", listType);
 		request.setAttribute("x", btnType);
 		request.setAttribute("btnRadioPrice", btnRadioPrice);

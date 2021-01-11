@@ -37,9 +37,10 @@ public class Type_ProductServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Connection conn = MyUtils.getStoredConnection(request) ;
+		String StrusernameLogin = (String)request.getParameter("usernameLogin");
 		String nameType = (String) request.getParameter("btnRadio");
 		String price = (String) request.getParameter("btnRadioPrice");
-		
+		System.out.println("nhap:"+StrusernameLogin);
 		String errorString = null;
 		List<product> list = null;
 		//sửa lỗi tiếng việt
@@ -59,6 +60,7 @@ public class Type_ProductServlet extends HttpServlet {
 			} 
 			
 			int countProduct= list.size();
+			request.setAttribute("usernameLogin", StrusernameLogin);
 			request.setAttribute("countProd", countProduct);		
 			request.setAttribute("ProductListServlet", list);
 			
