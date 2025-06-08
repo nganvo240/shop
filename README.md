@@ -1,3 +1,6 @@
-# shop
-sửa lại mấy hình, chuyển jpg sang base64 rồi copy vô cột img (kiểu dl test)
-link đổi: https://www.base64-image.de/
+# website bán giày
+Sơ đồ ngữ cảnh
+
+![image](https://github.com/user-attachments/assets/bac5969b-f975-45c4-ba2a-b1964997e3d5)
+
+
