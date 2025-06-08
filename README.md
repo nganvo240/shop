@@ -8,4 +8,5 @@ Sơ đồ ngữ cảnh
 
 
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/6ea12e0e-7054-4121-a6bb-1e27341ad10d)
+
